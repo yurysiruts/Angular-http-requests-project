@@ -15,6 +15,8 @@ export class AppComponent implements OnInit {
   public loadedPosts = [];
 
   public isLoading = false;
+  public error = null;
+  public errorType = null;
 
   constructor(
     private http: HttpClient,
@@ -25,6 +27,9 @@ export class AppComponent implements OnInit {
     this.postsService.fetchPosts().subscribe(posts => {
       this.isLoading = false;
       this.loadedPosts = posts;
+    }, error => {
+      this.error = error.error.error;
+      this.errorType = error.message;
     });
   }
 
@@ -40,10 +45,16 @@ export class AppComponent implements OnInit {
     this.postsService.fetchPosts().subscribe(posts => {
       this.isLoading = false;
       this.loadedPosts = posts;
+    }, error => {
+      this.error = error.error.error;
+      this.errorType = error.message;
     });
   }
 
   onClearPosts() {
     // Send Http request
+    this.postsService.clearPosts().subscribe(() => {
+      this.loadedPosts = [];
+    });
   }
 }

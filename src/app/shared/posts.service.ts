@@ -11,14 +11,14 @@ export class PostsService {
   createAndStorePost(title: string, content: string) {
     const postData: Post = {title: title, content: content}
     this.http.
-    post<{ name: string }>(
-      'https://http-practice-angular-ea87f-default-rtdb.europe-west1.firebasedatabase.app/posts.json', 
-      postData)
-    .subscribe(
-      responseData => {
-        console.log(responseData)
-      }
-    );
+      post<{ name: string }>(
+        'https://http-practice-angular-ea87f-default-rtdb.europe-west1.firebasedatabase.app/posts.json', 
+        postData)
+      .subscribe(
+        responseData => {
+          console.log(responseData)
+        }
+      );
   }
 
   fetchPosts() {
@@ -35,5 +35,11 @@ export class PostsService {
           return postsArray;
         })
       );
+  }
+
+  clearPosts() {
+    return this.http.delete(
+      'https://http-practice-angular-ea87f-default-rtdb.europe-west1.firebasedatabase.app/posts.json'
+    )
   }
 }

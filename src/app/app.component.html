@@ -60,8 +60,16 @@
           <p>{{ post.content }}</p>
         </li>
       </ul>
-      <div *ngIf="isLoading">Loading...</div>
-      <div class="lds-spinner" *ngIf="isLoading"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
+      
+      <div *ngIf="isLoading && !error">Loading...</div>
+      <!-- error handling -->
+      <div class="alert alert-danger" *ngIf="error">
+        <h3>An Error Occured</h3>
+        <h4>{{ error }}</h4>
+        <p>{{ errorType }}</p>
+      </div>
+      <!-- css spinner on fetching -->
+      <div class="lds-spinner" *ngIf="isLoading && !error"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
     </div>
   </div>
 </div>
