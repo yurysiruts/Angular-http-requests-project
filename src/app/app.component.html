@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-      <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value)">
+      <form #postForm="ngForm" (ngSubmit)="onCreatePost(postForm.value) ; postForm.reset()">
         <div class="form-group">
           <label for="title">Title</label>
           <input
@@ -67,6 +67,7 @@
         <h3>An Error Occured</h3>
         <h4>{{ error }}</h4>
         <p>{{ errorType }}</p>
+        <button class="btn btn-danger" (click)="error=null">Okay</button>
       </div>
       <!-- css spinner on fetching -->
       <div class="lds-spinner" *ngIf="isLoading && !error"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div>
